@@ -4,8 +4,8 @@ app = FastAPI()
 
 @app.get("/")
 def read_root():
-    return {"message": "Hello from Render!"}
+    return {"message": "Hello from the DTH IPM Analyzer"}
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run("main:app", host="0.0.0.0", port=10000)
+    uvicorn.run("main:app", host="0.0.0.0", port=10000, reload=True)
