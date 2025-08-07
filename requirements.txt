@@ -1,4 +1,3 @@
 fastapi
 uvicorn
-librosa
-numpy
+pydantic
