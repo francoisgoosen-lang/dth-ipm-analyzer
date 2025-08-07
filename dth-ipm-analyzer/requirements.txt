@@ -2,4 +2,4 @@ fastapi
 uvicorn
 librosa
 numpy
-scipy
+soundfile
