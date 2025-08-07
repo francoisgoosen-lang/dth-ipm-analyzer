@@ -2,5 +2,12 @@ services:
   - type: web
     name: dth-ipm-analyzer
     env: python
-    buildCommand: pip install -r requirements.txt
-    startCommand: uvicorn main:app --host=0.0.0.0 --port=10000
+    buildCommand: |
+      echo "Installing Python if not found"
+      if ! command -v python3 &> /dev/null
+      then
+          echo "Python not found. Installing..."
+          curl -sSL https://install.python-poetry.org | python3 -
+      fi
+      pip install -r requirements.txt
+    startCommand: python3 -m uvicorn main:app --host 0.0.0.0 --port 10000
