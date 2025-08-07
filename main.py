@@ -1,24 +1,13 @@
-from fastapi import FastAPI, UploadFile, File
+import os
 import uvicorn
-import librosa
-import numpy as np
+from fastapi import FastAPI
 
 app = FastAPI()
 
 @app.get("/")
 def read_root():
-    return {"message": "IPM Analyzer API is running"}
+    return {"message": "API running"}
 
-@app.post("/analyze")
-async def analyze(file: UploadFile = File(...)):
-    contents = await file.read()
-    with open("temp.wav", "wb") as f:
-        f.write(contents)
-
-    y, sr = librosa.load("temp.wav")
-    peaks = librosa.onset.onset_detect(y=y, sr=sr, units='time')
-    duration = librosa.get_duration(y=y, sr=sr)
-    
-    ipm = round(len(peaks) / duration * 60, 2)
-
-    return {"impacts_per_minute": ipm}
+if __name__ == "__main__":
+    port = int(os.environ.get("PORT", 8000))
+    uvicorn.run("main:app", host="0.0.0.0", port=port)
