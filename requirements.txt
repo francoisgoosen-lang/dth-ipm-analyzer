@@ -1,6 +1,6 @@
-fastapi
-uvicorn
-librosa
-numpy
-scipy
-soundfile
+fastapi==0.111.0
+uvicorn==0.30.1
+librosa==0.10.1
+numpy==1.26.4
+scipy==1.13.1
+soundfile==0.12.1
