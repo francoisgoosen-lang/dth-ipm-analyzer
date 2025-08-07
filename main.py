@@ -1,10 +1,15 @@
 from fastapi import FastAPI
+from pydantic import BaseModel
 
 app = FastAPI()
 
-@app.get("/")
-def read_root():
-    return {"message": "Hello from the DTH IPM Analyzer"}
+class AudioRequest(BaseModel):
+    impacts: int
+
+@app.post("/ipm")
+def calculate_ipm(data: AudioRequest):
+    # Example: impacts divided by 1 minute (for simplicity)
+    return {"ipm": data.impacts}
 
 if __name__ == "__main__":
     import uvicorn
